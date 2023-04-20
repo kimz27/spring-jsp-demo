@@ -7,11 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.springjspdemo.controller.bean.User;
+import com.example.springjspdemo.service.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 
 
 @Controller 
 public class LoginController {
+	
+	@Autowired
+	UserService userService;
+	 
 	
 	
 
@@ -23,17 +32,28 @@ public class LoginController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String WelcomePage(ModelMap model, @RequestParam String userId, @RequestParam String password) {
+		User user = userService.getUserByUserId(userId);
 		
-		if(userId.equals("202004831") && password.equals("root")) {
-			
+		
+		if (user.getPassword().equals(password)) {
+			model.put("userId", userId);
 			return "dashboard";
-		
 		}
-		if(userId.equals("202003363") && password.equals("root")) {
-			
-			return "dashboard";
 		
-		}
+		
+
+		
+		/*
+		 * if(userId.equals("202004831") && password.equals("root")) {
+		 * 
+		 * return "dashboard";
+		 * 
+		 * } if(userId.equals("202003363") && password.equals("root")) {
+		 * 
+		 * return "dashboard";
+		 * 
+		 * }
+		 */
 		
 	 
 			model.put("errorMsg", "please provide the correct user id and password");

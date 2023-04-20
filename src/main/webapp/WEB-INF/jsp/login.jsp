@@ -9,11 +9,12 @@
 
    <h2>${errorMsg}</h2>
   <form method = "post" >
-     <input type="number" name = "userId" placeholder="Student ID"/> <br>
+     <input type="text" class="form-control" name="userId"
+						placeholder="User ID" />
      <br>
      <input type="password" name="password" placeholder="password"/> <br>
      <br>
-     <button>LOGIN</button>
+     <button type="submit">Login</button>
   </form>
  <div></div>
 </body>
